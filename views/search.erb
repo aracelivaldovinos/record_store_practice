@@ -1,0 +1,12 @@
+<a href="/albums">Return to album list</a>
+
+<% if @search_array.any? %>
+  <ul>
+    <% @search_array.each do |album| %>
+      <li><a href="../albums/<%= album.id %>"><%= album.name %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are currently no records to display.</p>
+<% end %>
+

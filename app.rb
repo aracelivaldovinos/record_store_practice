@@ -11,11 +11,13 @@ also_reload('lib/**/*.rb')
 
 get('/') do
   @albums = Album.all
+  @albums = @albums.sort_by(&:name)
   erb(:albums)
 end
 
 get('/albums') do
   @albums = Album.all
+  @albums = @albums.sort_by(&:name)
   erb(:albums)
 end
 
@@ -39,6 +41,19 @@ post('/albums') do
   @albums = Album.all()
   erb(:albums)
 end
+
+post('/search') do
+  query = params[:search].downcase
+  @albums = Album.all
+  @search_array = @albums.select {|object| object.name.downcase===query}
+  erb(:search)
+end
+
+get('/search/:id/edit') do
+  @album = Album.find(params[:id].to_i())
+  erb(:edit_album)
+end
+
 
 get('/albums/:id/edit') do
   @album = Album.find(params[:id].to_i())

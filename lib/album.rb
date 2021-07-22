@@ -26,13 +26,18 @@ class Album
   def self.find(id)
     @@albums[id]
   end
-  def update(name)
+
+  def update(name, year, genre, artist)
     @name = name
+    @year = year
+    @genre = genre
+    @artist = artist
   end
+
   def delete
     @@albums.delete(self.id)
   end
-  def self.search 
-    @@albums[year]
+  def self.sort
+    @@albums.sort_by(&:name)
   end 
 end
